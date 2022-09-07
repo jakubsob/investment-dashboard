@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient();
+const transactions = await prisma.Transaction.findMany();
+console.log(transactions)
+prisma.$disconnect();
+---
+
+<Layout title="Investment dashboard">
+	<main class="m-5">
+    <ul class="list-disc list-inside">
+      {transactions.map((transaction) => (
+        <li>{JSON.stringify(transaction)}</li>
+      ))}
+    </ul>
+	</main>
+</Layout>
