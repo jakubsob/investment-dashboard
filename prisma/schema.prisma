@@ -15,5 +15,5 @@ model Transaction {
   currency  String   @db.VarChar(3)
   name      String   @db.VarChar(255)
   category  String   @db.VarChar(255)
-  protfolio String   @db.VarChar(255)
+  portfolio String   @db.VarChar(255)
 }
