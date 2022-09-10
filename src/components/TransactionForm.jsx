@@ -5,6 +5,7 @@ import * as yup from "yup";
 import Input from './Input';
 import Select from './Select';
 import ErrorMessage from './ErrorMessage';
+import axios from 'axios';
 
 const schema = yup.object({
   assetName: yup.string().trim().required(),
@@ -22,7 +23,14 @@ export default function TransactionForm() {
   });
 
   const onSubmit = data => {
-    alert(JSON.stringify(data));
+    axios
+      .post('http://localhost:3001/post', data)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -61,14 +69,6 @@ export default function TransactionForm() {
           registerProps={{ required: true, maxLength: 3 }}
         />
         <ErrorMessage message={errors.currency && "Currency must be a 3 letter symbol"}></ErrorMessage>
-        <Select
-          id="currency"
-          label="Currency"
-        >
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="PLN">PLN</option>
-        </Select>
         <Input
           label="Date"
           id="date"
