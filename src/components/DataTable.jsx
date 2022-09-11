@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
+const { PUBLIC_API_URL } = import.meta.env;
 
 const DataTable = (props) => {
   const [transactions, setTransactions] = useState();
 
   const handleRefresh = () => {
-    console.log("effect")
     axios
-      .get('http://localhost:3001/transaction/')
+      .get(`${PUBLIC_API_URL}/transaction`)
       .then(function (response) {
         const data = response.data;
         setTransactions(data);

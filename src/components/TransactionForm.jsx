@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Input from './Input';
-import Select from './Select';
 import ErrorMessage from './ErrorMessage';
 import axios from 'axios';
+const { PUBLIC_API_URL } = import.meta.env;
 
 const schema = yup.object({
   assetName: yup.string().trim().required(),
@@ -24,7 +24,7 @@ export default function TransactionForm() {
 
   const onSubmit = data => {
     axios
-      .post('http://localhost:3001/post', data)
+      .post(`${PUBLIC_API_URL}/post`, data)
       .then(function (response) {
         console.log(response);
       })
